@@ -14,8 +14,8 @@
 echo -n 'Discovering the printer...'
 printerInfos=$(lpinfo  -l -v | grep -B 3 -A 2 'make-and-model = RICOH MP C306Z')
 printerURI=$(echo "$printerInfos" | head -n1 | sed 's/Device: uri = //g')
-printerMakeAndModel=$(echo "$printerInfos" | sed -n 3p | sed 's/        info = //g')
-printerMakeAndModelSlug=$(echo "$printerMakeAndModel" | sed 's/ /-/g')
+printerMakeAndModel=$(echo "$printerInfos" | sed -n 3p | sed 's/\s*info = //g')
+printerMakeAndModelSlug=$(echo "$printerMakeAndModel" | tr ' ' '-')
 
 echo '\033[0;32m'"$printerMakeAndModel"' found !\033[0m'
 	
