@@ -22,8 +22,8 @@ echo '\033[0;32m'"$printerMakeAndModel"' found !\033[0m'
 # Ask for UserCode
 echo -n 'Enter your UserCode :'
 read userCode
-if [ -z "$userCode" ] ;then
-	echo 'UserCode Empty' 
+if [ -z $(echo "$userCode" | grep -oE '^[0-9]{1,8}$') ] ;then
+	echo '\033[0;31mUserCode empty or invalid\033[0m' 
 else
 	# Get printer driver, update it with given UserCode and write it in cups ppd's path
 	echo -n 'Downloading and preparing the driver...'
